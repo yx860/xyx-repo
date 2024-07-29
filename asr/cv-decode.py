@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import time 
 
-#URL for api and the folder path to assess mp3 files. Folder is stored in asr directory.
+#URL for api and the folder path to access mp3 files. Folder is asssumed to be stored in asr directory.
 url = "http://localhost:8001/asr"
 dir_path = Path(__file__).parent.parent/"cv-valid-dev"
 
