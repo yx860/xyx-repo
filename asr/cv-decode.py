@@ -17,16 +17,11 @@ csv_file[new_column_name] = pd.NA
 
 # Open the file and send it in the POST request
 for i, mp3_file in enumerate(dir_path.glob('*.mp3')):
-    # if i == 5:
-    #     break
     for n in range(tries): 
         try:
             with open(mp3_file, 'rb') as f:
                 files = {'file': f}
                 response = requests.post(url, files=files).json()
-
-            # capped to the first 5 mp3 files in the folder for testing purpose   
-            
 
             #obtain the transcription and write into new CSV file  
             transcription = response['transcription']
