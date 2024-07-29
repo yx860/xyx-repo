@@ -4,10 +4,14 @@ from pathlib import Path
 import pandas as pd
 import time 
 
-# Define the URL and the file path
+#URL for api and the folder path to assess mp3 files. Folder is stored in asr directory.
 url = "http://localhost:8001/asr"
 dir_path = Path(__file__).parent.parent/"cv-valid-dev"
+
+#CSV file is stored in the same folder as cv-decode.py
 csv_file = "cv-valid-dev.csv"
+#Path for the new CSV file.
+new_csv_file_path = Path(__file__).parent.parent/"deployment-design/elastic-backend/cv-valid-devtest.csv"
 
 tries = 5
 
@@ -34,7 +38,5 @@ for i, mp3_file in enumerate(dir_path.glob('*.mp3')):
             print(e)
             time.sleep(2*n)
 
-#overwrite CSV file with the new data 
-csv_file.to_csv('cv-valid-dev.csv', index=False)
-
-
+#Store modified CSV file in new elastic-backend folder for indexing
+csv_file.to_csv(new_csv_file_path, index=False)
