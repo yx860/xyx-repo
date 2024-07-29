@@ -3,15 +3,14 @@ import pandas as pd
 import os
 
 # Path to CSV file
-
 csv_file_path = os.path.join(os.path.dirname(__file__), "cv-valid-dev-test.csv")
-print(csv_file_path)
+
 # Read the CSV file into a DataFrame
 df = pd.read_csv(csv_file_path)
 
 df = df.where(pd.notnull(df), None)
 print(df)
-# Convert DataFrame to a list of dictionaries, filtering only the required fields
+# Convert DataFrame to a list of dictionaries
 records = df.to_dict('records')
 
 # Connect to the Elasticsearch cluster
