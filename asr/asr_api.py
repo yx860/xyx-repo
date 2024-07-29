@@ -18,15 +18,11 @@ async def pong():
 @app.post("/asr")
 async def create_upload_file(file: UploadFile = File(...)):
 
-    # if file.content_type != "text/plain":
-    #     return JSONResponse(status_code=400, content={"message": "Invalid file type. Only text files are accepted."})
     audio_data = BytesIO(await file.read())
     waveform, sample_rate = torchaudio.load(audio_data, format="mp3")
     
-    #ds = load_dataset("patrickvonplaten/librispeech_asr_dummy", "clean", split="validation")
     mp3_audio = MP3(audio_data)
     duration = mp3_audio.info.length
-
 
     if sample_rate != 16000:
         resampler = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=16000)
